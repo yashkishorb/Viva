@@ -1,0 +1,60 @@
+// Practical: Encryption and decryption using modified Caesar cipher
+
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char str[100];
+    int choice;
+    int i;
+    int key;
+
+    printf("Enter a string: ");
+    scanf("%s", str);
+
+    printf("Enter shift key: ");
+    scanf("%d", &key);
+
+    printf("1. Encryption\n");
+    printf("2. Decryption\n");
+    printf("Enter your choice: ");
+    scanf("%d", &choice);
+
+    if (choice == 2)
+    {
+        key = -key;
+    }
+
+    if (choice == 1 || choice == 2)
+    {
+        key = key % 26;
+
+        for (i = 0; str[i] != '\0'; i++)
+        {
+            if (str[i] >= 'A' && str[i] <= 'Z')
+            {
+                str[i] = ((str[i] - 'A' + key + 26) % 26) + 'A';
+            }
+            else if (str[i] >= 'a' && str[i] <= 'z')
+            {
+                str[i] = ((str[i] - 'a' + key + 26) % 26) + 'a';
+            }
+        }
+
+        if (choice == 1)
+        {
+            printf("Encrypted string: %s", str);
+        }
+        else
+        {
+            printf("Decrypted string: %s", str);
+        }
+    }
+    else
+    {
+        printf("Invalid choice");
+    }
+
+    return 0;
+}
